@@ -1,20 +1,16 @@
 {
-   "version":2,
-   
-    "builds":[
-        {
-            "src":"./index.js",
-            "use":"@vercel/node"
-        }
-    ],
-    "routes": [
+  "builds": [
       {
-        "src": "/Createblog",
-        "dest": "/Createblog.js"
-      },
-      {
-        "src": "/blog",
-        "dest": "/blog.js"
+          "src": "index.js",
+          "use": "@vercel/node"
       }
-    ]
+  ],
+  "routes": [
+      {
+          "src": "/(.*)",
+          "dest": "index.js"
+      }
+  ]
   }
+  
+  
