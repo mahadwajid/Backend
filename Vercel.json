@@ -1,0 +1,12 @@
+{
+    "routes": [
+      {
+        "src": "/Createblog",
+        "dest": "/Createblog.js"
+      },
+      {
+        "src": "/blog",
+        "dest": "/blog.js"
+      }
+    ]
+  }
