@@ -8,8 +8,52 @@
   ],
   "routes": [
     {
+      "src": "/Admin/Adminblog",
+      "dest": "./Routes/Addblog.js"
+    },
+    {
+      "src": "/Admin/Showblog",
+      "dest": "./Routes/Showblog.js"
+    },
+    {
+      "src": "/Blog",
+      "dest": "./Routes/Addblog.js"
+    },
+    {
+      "src": "/images",
+      "dest": "static"
+    },
+    {
+      "src": "/Blogshow",
+      "dest": "./Routes/Showblogshow.js"
+    },
+    {
+      "src": "/Admin/Patientdata",
+      "dest": "./Routes/Routepatientdata.js"
+    },
+    {
+      "src": "/Admin/ShowPatientdata",
+      "dest": "./Routes/Routepatientdata.js"
+    },
+    {
+      "src": "/Login",
+      "dest": "./Routes/Routelogin.js"
+    },
+    {
+      "src": "/Admin/AddService",
+      "dest": "./Routes/RouteService.js"
+    },
+    {
+      "src": "/Admin/ShowService",
+      "dest": "./Routes/RouteService.js"
+    },
+    {
+      "src": "/Servicesshow",
+      "dest": "./Routes/RouteshowService.js"
+    },
+    {
       "src": "/(.*)",
-     "dest": "/"
+      "dest": "/index.js"
     }
   ]
 }
