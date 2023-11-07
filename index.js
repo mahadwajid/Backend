@@ -1,14 +1,14 @@
 import express from 'express';
 import bodyParser from 'body-parser';   
 import cors from 'cors';
-import Createblog from '../Routes/Addblog.js';
-import blog from '../Routes/Addblog.js';
-import Routeblogshow from '../Routes/Showblog.js';
-import Routepatientdata from '../Routes/Addpatientdata.js';
-import Routelogin from '../Routes/Login.js';
-import RouteService from '../Routes/Addservice.js';
-import RouteshowService from '../Routes/ShowService.js';
-import { connection } from '../Connection.js';
+import Createblog from './Routes/Addblog.js';
+import blog from './Routes/Addblog.js';
+import Routeblogshow from './Routes/Showblog.js';
+import Routepatientdata from './Routes/Addpatientdata.js';
+import Routelogin from './Routes/Login.js';
+import RouteService from './Routes/Addservice.js';
+import RouteshowService from './Routes/ShowService.js';
+import { connection } from './Connection.js';
 
 
 const app = express();
