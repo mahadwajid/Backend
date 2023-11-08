@@ -14,7 +14,7 @@ AWS.config.update({
 });
 
 const s3 = new AWS.S3();
-const s3BucketName = 'cyclic-lime-prickly-newt-us-west-2';
+const s3BucketName = 'cyclic-blue-zealous-goldfish-us-west-2';
 
 const uploadS3 = multer({
   storage: multerS3({
