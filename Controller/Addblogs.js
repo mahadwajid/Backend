@@ -1,88 +1,43 @@
 import BlogModel from '../Model/Addblog.js';
-import multer from 'multer';
-import multerS3 from 'multer-storage-s3';
-import AWS from 'aws-sdk';
-import dotenv from 'dotenv';
+import cloudinary from '../cloudinaryConfig.js';
 
-dotenv.config();
-
-AWS.config.update({
-  accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-  secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
-  sessionToken: process.env.AWS_SESSION_TOKEN,
-  region: process.env.AWS_REGION,
-});
-
-const s3 = new AWS.S3();
-const s3BucketName = 'cyclic-blue-zealous-goldfish-us-west-2';
-
-const uploadS3 = multer({
-  storage: multerS3({
-    s3: s3,
-    bucket: s3BucketName,
-    contentType: multerS3.AUTO_CONTENT_TYPE,
-    acl: 'public-read',
-    key: function (req, file, cb) {
-      cb(null, 'blogs/' + Date.now() + '-' + file.originalname);
-    },
-  }),
-});
-
-export const createBlog = uploadS3.fields([{ name: 'image', maxCount: 1 }, { name: 'authorImage', maxCount: 1 }], async (req, res) => {
+export const createBlog = async (req, res) => {
   const { title, content, publishDate, author } = req.body;
 
   try {
-    // Upload images to S3 and retrieve publicly accessible URLs
-    const imagePromise = uploadToS3(req.files['image'][0]);
-    const authorImagePromise = uploadToS3(req.files['authorImage'][0]);
+    const imageUploadResult = await cloudinary.uploader.upload(req.files['image'][0].path, {
+      folder: "blogs",
+    });
 
-    const [imageUrl, authorImageUrl] = await Promise.all([imagePromise, authorImagePromise]);
+    const authorImageUploadResult = await cloudinary.uploader.upload(req.files['authorImage'][0].path, {
+      folder: "blogs",
+    });
 
-    // Create new blog post
     const newBlog = new BlogModel({
       title,
       author,
       content,
       publishDateTime: new Date(publishDate),
       authorImage: {
-        url: authorImageUrl,
+        public_id: authorImageUploadResult.public_id,
+        url: authorImageUploadResult.secure_url
       },
       image: {
-        url: imageUrl,
+        public_id: imageUploadResult.public_id,
+        url: imageUploadResult.secure_url
       },
     });
 
-    // Save the blog post to the database
-    const savedBlog = await newBlog.save();
-    console.log(savedBlog);
+    const savedProduct = await newBlog.save();
+    console.log(savedProduct);
 
-    // Send success response
     res.json({ Response: true, message: 'Added Successfully' });
-    console.log('Blog added successfully');
+    console.log("Blog added successfully");
   } catch (error) {
-    console.error(error);
-    if (error.code === 'AccessDenied') {
-      res.status(401).json({ Response: false, message: 'Unauthorized access to S3' });
-    } else {
-      res.status(500).json({ Response: false, message: 'Internal Server Error' });
-    }
+    console.log(error);
+    res.status(500).json({ Response: false, message: 'Internal Server Error' });
   }
-});
-
-async function uploadToS3(file) {
-  const params = {
-    Bucket: s3BucketName,
-    Key: file.originalname,
-    Body: file.buffer,
-  };
-
-  await s3.upload(params).promise();
-  const url = await s3.getSignedUrl('getObject', { Bucket: s3BucketName, Key: file.originalname });
-  return url;
-}
-
-
-
+};
 
 
 // Get all blogs

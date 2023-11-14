@@ -6,10 +6,11 @@ export const createService = async (req, res) => {
   const { title, Content, image } = req.body;
   
   try {
-    // Use cloudinary to upload the image to Cloudinary
-    const result = await cloudinary.uploader.upload(req.files['image'][0].path, {
+  
+    const result = await cloudinary.uploader.upload(req.file.path, {
       folder: "services",
     });
+
 
     const newService = new ServiceModel({
       title,

@@ -28,7 +28,7 @@ const blogStructure = mongoose.Schema(
    }
    
   },
-  { timestamps: true },
+  {timestamps: true},
   
 );
 

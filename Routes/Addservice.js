@@ -1,6 +1,7 @@
 import express from 'express';
 import multer from 'multer';
 import { createService, deleteService, getService, getServicebyid, updateService } from '../Controller/AddService.js';
+// import upload from '../middlewares/MulterMiddleware.js'
 
 
 const router = express.Router();
@@ -21,7 +22,7 @@ const upload= multer({
     },
 });
 
-router.post('/',upload.fields([{ name: 'image' }]), createService);
+router.post('/',upload.single("image"), createService);
 
 router.get('/', getService);
 
