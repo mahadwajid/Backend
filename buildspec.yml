@@ -1,0 +1,23 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      nodejs: 14
+
+  pre_build:
+    commands:
+      - npm ci
+
+  build:
+    commands:
+      - npm run build
+
+artifacts:
+  files:
+    - '**/*'
+  base-directory: '.'  # Change this to the appropriate directory where your built files are located
+
+cache:
+  paths:
+    - 'node_modules/**/*'
