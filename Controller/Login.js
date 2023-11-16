@@ -21,7 +21,7 @@ export const loginAdmin = (req, res) => {
              }
              );
         console.log(token);
-        res.json({ token });
+        res.send({ token });
     } else {
         // Login failed
         res.status(401).send('Login failed');

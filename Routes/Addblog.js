@@ -1,5 +1,6 @@
 import express from 'express';
 import multer from 'multer';
+import fileUpload from 'express-fileupload';
 import { createBlog, deleteblog, getBlogs, updateProduct,} from '../Controller/Addblogs.js';
 import { auth } from '../middlewares/Authentication.js';
 
@@ -21,8 +22,14 @@ const upload= multer({
     },
 });
 
+// router.use(fileUpload({
+//     useTempFiles: true,
+//     tempFileDir: './images/'
+// }));
+
 // Routes for blogs
 router.post('/',  upload.fields([{ name: 'image' }, { name: 'authorImage' }]), createBlog);
+// router.post('/', createBlog);
 router.get('/', getBlogs);
 
 router.delete("/:id",deleteblog);
