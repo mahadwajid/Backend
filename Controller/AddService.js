@@ -1,5 +1,6 @@
 import ServiceModel from '../Model/AddService.js';
 import cloudinary from '../cloudinaryConfig.js';
+import fs from 'fs/promises';
 
 export const createService = async (req, res) => {
 
@@ -7,7 +8,7 @@ export const createService = async (req, res) => {
   
   try {
   
-    const result = await cloudinary.uploader.upload(req.file.path, {
+    const result = await cloudinary.uploader.upload(image, {
       folder: "services",
     });
 

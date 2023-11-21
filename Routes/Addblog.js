@@ -1,6 +1,5 @@
 import express from 'express';
 import multer from 'multer';
-import fileUpload from 'express-fileupload';
 import { createBlog, deleteblog, getBlogs, updateProduct,} from '../Controller/Addblogs.js';
 import { auth } from '../middlewares/Authentication.js';
 
