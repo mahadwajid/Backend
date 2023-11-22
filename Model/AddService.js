@@ -17,8 +17,8 @@ const ServiceStructure = mongoose.Schema(
     //     }
     //  }
     image:{
-      type:String,
-   }
+      type: String,
+    }
      
     }
     

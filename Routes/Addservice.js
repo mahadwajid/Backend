@@ -15,14 +15,9 @@ const storage = multer.diskStorage({
     },
 });
 
-const upload= multer({
-    storage : storage,
-    limits: {
-        fieldSize: 1024 * 1024 * 50,
-    },
-});
+const upload= multer({storage : storage});
 
-router.post('/',auth,upload.single("image"), createService);
+router.post('/',upload.single("image"), createService);
 
 router.get('/', getService);
 
