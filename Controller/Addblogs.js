@@ -2,7 +2,7 @@ import BlogModel from '../Model/Addblog.js';
 import cloudinary from '../cloudinaryConfig.js';
 
 export const createBlog = async (req, res) => {
-  const { title, content, publishDate, author } = req.body;
+  const { title, content, author } = req.body;
 
   try {
     const imageUploadResult = await cloudinary.uploader.upload(req.files['image'][0].path, {
@@ -17,7 +17,7 @@ export const createBlog = async (req, res) => {
       title,
       author,
       content,
-      publishDateTime: new Date(publishDate),
+      // publishDateTime: new Date(publishDate),
       authorImage: {
         public_id: authorImageUploadResult.public_id,
         url: authorImageUploadResult.secure_url

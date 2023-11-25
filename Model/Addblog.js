@@ -4,7 +4,7 @@ const blogStructure = mongoose.Schema(
   {
     title: { type: String, required: true },
     content: { type: String, required: true },
-    publishDateTime: { type: Date, required: true },
+    // publishDateTime: { type: Date, required: true },
     author: { type: String, required: true },
     authorImage: { 
       public_id:{
